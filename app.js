@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 
 const app = express();
+const connectDB = require("./db/connect");
 
 const PORT = process.env.PORT || 9000;
 
@@ -23,7 +24,7 @@ app.use(errorMiddleware);
 
 const start = async () => {
   try {
-    //connectDB
+    await connectDB(process.env.CONNECTION_MONGODB);
     app.listen(PORT, console.log(`Server is listening on port ${PORT}`));
   } catch (err) {
     console.log(err);
